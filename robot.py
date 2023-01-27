@@ -6,8 +6,8 @@ from pyrosim.neuralNetwork import NEURAL_NETWORK
 
 class ROBOT:
     def __init__(self):
-        self.sensors={}
-        self.motors={}
+        self.sensors = {}
+        self.motors = {}
         
         self.robotId = p.loadURDF("body.urdf")
         
@@ -35,10 +35,20 @@ class ROBOT:
                 jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
                 desiredAngle = self.nn.Get_Value_Of(neuronName)
                 self.motors[jointName].Set_Value(self.robotId, desiredAngle)
-                print(jointName, desiredAngle)
+                # print(jointName, desiredAngle)
         # for motor in self.motors:
         #     self.motors[motor].Set_Value(self.robotId, desiredAngle)
 
+    def Get_Fitness(self):
+        stateOfLinkZero = p.getLinkState(self.robotId,0)
+        positionOfLinkZero = stateOfLinkZero[0]
+        xCoordinateOfLinkZero = positionOfLinkZero[0]
+        # print("X Coord ", xCoordinateOfLinkZero)
+
+        with open('fitness.txt', 'w') as out_file:
+            out_file.write(str(xCoordinateOfLinkZero))
+        # exit()
+
     def Think(self):
-        self.nn.Print()
+        # self.nn.Print()
         self.nn.Update()

@@ -8,8 +8,8 @@ from world import WORLD
 from robot import ROBOT
 
 class SIMULATION:
-    def __init__(self):
-        self.world = WORLD()
+    def __init__(self, dOrG):
+        self.world = WORLD(dOrG)
         self.robot = ROBOT()
 
     def Run(self):
@@ -19,8 +19,12 @@ class SIMULATION:
             self.robot.Sense(i)
             self.robot.Think()
             self.robot.Act(i)
+            self.robot.Get_Fitness()
 
-            time.sleep(1/240)
+            time.sleep(1/2400)
+
+    def Get_Fitness(self):
+        self.robot.Get_Fitness()
 
     def __del__(self):
         p.disconnect()
