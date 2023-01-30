@@ -8,9 +8,9 @@ from world import WORLD
 from robot import ROBOT
 
 class SIMULATION:
-    def __init__(self, dOrG):
+    def __init__(self, dOrG, solutionID):
         self.world = WORLD(dOrG)
-        self.robot = ROBOT()
+        self.robot = ROBOT(solutionID)
 
     def Run(self):
         for i in range(1000):

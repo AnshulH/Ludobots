@@ -15,3 +15,4 @@ backLegVal = numpy.zeros(1000)
 frontLegVal = numpy.zeros(1000)
 
 numberOfGenerations = 10
+populationSize = 2
