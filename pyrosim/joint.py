@@ -16,7 +16,7 @@ class JOINT:
 
         self.depth = 1
 
-    def Save(self,f):
+    def Save(self,f, temp):
 
         Save_Whitespace(self.depth,f)
         f.write('<joint name="' + self.name + '" type="' + self.type + '">' + '\n')

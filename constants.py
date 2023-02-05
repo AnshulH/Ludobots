@@ -1,18 +1,18 @@
-import numpy
+# Constants file, any changes here will affect the simulations
 
-backLegSensorValues = numpy.zeros(1000)
-frontLegSensorValues = numpy.zeros(1000)
+import numpy as np
 
-amplitudeBackLeg = numpy.pi / 4
-frequencyBackLeg = 10
-phaseOffsetBackLeg = numpy.pi / 8
+# Constants for generating sinusoidal patterns
+amplitude = np.pi / 8
+frequency = 18
+phaseOffset = 0
+amplitudeBack = np.pi / 3
+frequencyBack = 100
+phaseOffsetBack = np.pi / 4
 
-amplitudeFrontLeg = numpy.pi / 4
-frequencyFrontLeg = 10
-phaseOffsetFrontLeg = 0
-
-backLegVal = numpy.zeros(1000)
-frontLegVal = numpy.zeros(1000)
-
-numberOfGenerations = 10
-populationSize = 2
+# Constants for modifying the number of trials
+numberOfGenerations = 2
+populationSize = 5
+numSensorNeurons = 8
+numMotorNeurons = 12
+motorJointRange = 0.5
