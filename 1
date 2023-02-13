@@ -1,0 +1,12 @@
+pybullet build time: Jan  8 2023 11:41:37
+b3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+expected a world element, continuing without it.b3Error[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,121]:
+Error=XML_ERROR_MISMATCHED_ELEMENT ErrorID=16 (0x10) Line number=8: XMLElement name=visualDIRECT
+Traceback (most recent call last):
+  File "simulate.py", line 14, in <module>
+    simulation = SIMULATION(dOrG, solutionID)
+  File "/Users/justyeetit/Desktop/Artificial/Ludobots/simulation.py", line 13, in __init__
+    self.robot = ROBOT(solutionID)
+  File "/Users/justyeetit/Desktop/Artificial/Ludobots/robot.py", line 14, in __init__
+    self.robotId = p.loadURDF("body.urdf")
+pybullet.error: Cannot load URDF file.

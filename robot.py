@@ -45,7 +45,7 @@ class ROBOT:
         xCoordinateOfLinkZero = positionOfLinkZero[0]
         fitness_path = "tmp" + str(self.myId) + ".txt"
         with open(fitness_path, 'w') as out_file:
-            out_file.write(str(xCoordinateOfLinkZero))
+            out_file.write(str(-1 * xCoordinateOfLinkZero))
 
         os.system('mv tmp' + str(self.myId) + '.txt fitness' + str(self.myId) + '.txt') 
 

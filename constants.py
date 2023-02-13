@@ -1,18 +1,19 @@
-# Constants file, any changes here will affect the simulations
 
-import numpy as np
 
-# Constants for generating sinusoidal patterns
-amplitude = np.pi / 8
-frequency = 18
-phaseOffset = 0
-amplitudeBack = np.pi / 3
-frequencyBack = 100
-phaseOffsetBack = np.pi / 4
+import numpy as numpy
+pi_four = numpy.pi / 4.0
 
-# Constants for modifying the number of trials
-numberOfGenerations = 20
-populationSize = 5
-numSensorNeurons = 6
-numMotorNeurons = 10
-motorJointRange = 0.8
+num_iterations = 1000
+time_step = 1/1000 #60
+
+max_force = 200
+amplitude = pi_four
+frequency = 10
+offset = numpy.pi / 8.0
+
+numberOfGenerations = 1 #10
+populationSize = 1 # 10
+
+numSensorNeurons = 2 # number of things in linkNames (in solution.py)
+numMotorNeurons = 2 # number of things in jointNames (in solution.py)
+motorJointRange = 0.3
