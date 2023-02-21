@@ -85,50 +85,50 @@ class SOLUTION:
                             childCoords[linkNum] = [0.5*currDir[0],-0.5*currDir[1],0]
                         if coordinate == 5:
                             childCoords[linkNum] = [0,-0.5*currDir[1],0.5*currDir[2]]
-                if currCoord == 1:
-                    if coordinate == 1:
-                        childCoords[linkNum] = [0,0,0]
-                    if coordinate == 2:
-                        childCoords[linkNum] = [0,currDir[1],0]
-                    if coordinate == 3:
-                        childCoords[linkNum] = [-0.5*currDir[0],0.5*currDir[1],0]
-                    if coordinate == 4:
-                        childCoords[linkNum] = [0.5*currDir[0],0.5*currDir[1],0]
-                    if coordinate == 5:
-                        childCoords[linkNum] = [0,0.5*currDir[1],0.5*currDir[2]]
-                if currCoord == 2:
-                    if coordinate == 1:
-                        childCoords[linkNum] = [-0.5*currDir[0],-0.5*currDir[1],0]
-                    if coordinate == 2:
-                        childCoords[linkNum] = [-0.5*currDir[0],0.5*currDir[1],0]
-                    if coordinate == 3:
-                        childCoords[linkNum] = [-currDir[0],0,0]
-                    if coordinate == 4:
-                        childCoords[linkNum] = [0,0,0]
-                    if coordinate == 5:
-                        childCoords[linkNum] = [-0.5*currDir[0],0,0.5*currDir[2]]
-                if currCoord == 3:
-                    if coordinate == 1:
-                        childCoords[linkNum] = [0.5*currDir[0],-0.5*currDir[1],0]
-                    if coordinate == 2:
-                        childCoords[linkNum] = [0.5*currDir[0],0.5*currDir[1],0]
-                    if coordinate == 3:
-                        childCoords[linkNum] = [0,0,0]
-                    if coordinate == 4:
-                        childCoords[linkNum] = [currDir[0],0,0]
-                    if coordinate == 5:
-                        childCoords[linkNum] = [0.5*currDir[0],0,0.5*currDir[2]]
-                if currCoord == 4:
-                    if coordinate == 1:
-                        childCoords[linkNum] = [0,-0.5*currDir[1],0.5*currDir[2]]
-                    if coordinate == 2:
-                        childCoords[linkNum] = [0,0.5*currDir[1],0.5*currDir[2]]
-                    if coordinate == 3:
-                        childCoords[linkNum] = [-0.5*currDir[0],0,0.5*currDir[2]]
-                    if coordinate == 4:
-                        childCoords[linkNum] = [0.5*currDir[0],0,0.5*currDir[2]]
-                    if coordinate == 5:
-                        childCoords[linkNum] = [0,0,currDir[2]]
+                    if currCoord == 1:
+                        if coordinate == 1:
+                            childCoords[linkNum] = [0,0,0]
+                        if coordinate == 2:
+                            childCoords[linkNum] = [0,currDir[1],0]
+                        if coordinate == 3:
+                            childCoords[linkNum] = [-0.5*currDir[0],0.5*currDir[1],0]
+                        if coordinate == 4:
+                            childCoords[linkNum] = [0.5*currDir[0],0.5*currDir[1],0]
+                        if coordinate == 5:
+                            childCoords[linkNum] = [0,0.5*currDir[1],0.5*currDir[2]]
+                    if currCoord == 2:
+                        if coordinate == 1:
+                            childCoords[linkNum] = [-0.5*currDir[0],-0.5*currDir[1],0]
+                        if coordinate == 2:
+                            childCoords[linkNum] = [-0.5*currDir[0],0.5*currDir[1],0]
+                        if coordinate == 3:
+                            childCoords[linkNum] = [-currDir[0],0,0]
+                        if coordinate == 4:
+                            childCoords[linkNum] = [0,0,0]
+                        if coordinate == 5:
+                            childCoords[linkNum] = [-0.5*currDir[0],0,0.5*currDir[2]]
+                    if currCoord == 3:
+                        if coordinate == 1:
+                            childCoords[linkNum] = [0.5*currDir[0],-0.5*currDir[1],0]
+                        if coordinate == 2:
+                            childCoords[linkNum] = [0.5*currDir[0],0.5*currDir[1],0]
+                        if coordinate == 3:
+                            childCoords[linkNum] = [0,0,0]
+                        if coordinate == 4:
+                            childCoords[linkNum] = [currDir[0],0,0]
+                        if coordinate == 5:
+                            childCoords[linkNum] = [0.5*currDir[0],0,0.5*currDir[2]]
+                    if currCoord == 4:
+                        if coordinate == 1:
+                            childCoords[linkNum] = [0,-0.5*currDir[1],0.5*currDir[2]]
+                        if coordinate == 2:
+                            childCoords[linkNum] = [0,0.5*currDir[1],0.5*currDir[2]]
+                        if coordinate == 3:
+                            childCoords[linkNum] = [-0.5*currDir[0],0,0.5*currDir[2]]
+                        if coordinate == 4:
+                            childCoords[linkNum] = [0.5*currDir[0],0,0.5*currDir[2]]
+                        if coordinate == 5:
+                            childCoords[linkNum] = [0,0,currDir[2]]
 
             if linkNum in self.spawns:
                 self.spawns[linkNum].append(linkNum+1)
@@ -165,7 +165,6 @@ class SOLUTION:
                 pyrosim.Send_Motor_Neuron(name=f"motor_{idx}_{kid}", jointName=joint_name)
                 name_count += 1
 
-        #nested for loop from K below:
         for currentRow in range(c.numSensorNeurons):
             for currentColumn in range(c.numMotorNeurons):
                 pyrosim.Send_Synapse(sourceNeuronName = currentRow, targetNeuronName = currentColumn + c.numSensorNeurons, weight = self.weights[currentRow][currentColumn])
@@ -184,7 +183,6 @@ class SOLUTION:
         os.system("rm" + " fitness" + str(self.myID) + ".txt")
 
     def Mutate(self):
-        #print(self.weights)
         randomRow = random.randint(0, c.numSensorNeurons -1)
         randomColumn = random.randint(0, c.numMotorNeurons - 1)
         self.weights[randomRow,randomColumn] = random.random() * 2 - 1
