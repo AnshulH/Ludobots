@@ -119,7 +119,6 @@ class SOLUTION:
                     if coordinate == 5:
                         childCoords[linkNum] = [0.5*currDir[0],0,0.5*currDir[2]]
                 if currCoord == 4:
-                    # need to figure out a way to make this work for different sizes
                     if coordinate == 1:
                         childCoords[linkNum] = [0,-0.5*currDir[1],0.5*currDir[2]]
                     if coordinate == 2:
