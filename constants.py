@@ -7,7 +7,7 @@ pi_four = numpy.pi / 4.0
 num_iterations = 1000
 time_step = 1/1000 #60
 
-max_force = 200
+max_force = 200.0
 amplitude = pi_four
 frequency = 10
 offset = numpy.pi / 8.0

@@ -15,7 +15,7 @@ from robot import ROBOT
 from sensor import SENSOR
 
 class SIMULATION:
-    def __init__(self, directOrGUI, solutionID):
+    def __init__(self, directOrGUI="GUI", solutionID=0):
         directOrGUI = "GUI"
         if directOrGUI == "DIRECT":
             self.physicsClient = p.connect(p.DIRECT)

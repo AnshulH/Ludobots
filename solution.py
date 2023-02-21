@@ -73,61 +73,64 @@ class SOLUTION:
                     childCoords[linkNum] = [self.lengths[linkNum][0], 0, 0]
                 elif coordinate == currCoord - 1:
                     childCoords[linkNum] = [0, 0, 0]
+                    # choose side to add to
+        # 1 -y 2 +y 3 -x 4 +x 5 +z
+        # 1 x 2 -x 3 y 4 -y 5 +z
                 else:
                     if currCoord == 0:
-                        if coordinate == 1:
+                        if coordinate == 0:
                             childCoords[linkNum] = [0,-currDir[1],0]
-                        if coordinate == 2:
+                        if coordinate == 1:
                             childCoords[linkNum] = [0,0,0]
-                        if coordinate == 3:
+                        if coordinate == 2:
                             childCoords[linkNum] = [-0.5*currDir[0],-0.5*currDir[1],0]
-                        if coordinate == 4:
+                        if coordinate == 3:
                             childCoords[linkNum] = [0.5*currDir[0],-0.5*currDir[1],0]
-                        if coordinate == 5:
+                        if coordinate == 4:
                             childCoords[linkNum] = [0,-0.5*currDir[1],0.5*currDir[2]]
                     if currCoord == 1:
-                        if coordinate == 1:
+                        if coordinate == 0:
                             childCoords[linkNum] = [0,0,0]
-                        if coordinate == 2:
+                        if coordinate == 1:
                             childCoords[linkNum] = [0,currDir[1],0]
-                        if coordinate == 3:
+                        if coordinate == 2:
                             childCoords[linkNum] = [-0.5*currDir[0],0.5*currDir[1],0]
-                        if coordinate == 4:
+                        if coordinate == 3:
                             childCoords[linkNum] = [0.5*currDir[0],0.5*currDir[1],0]
-                        if coordinate == 5:
+                        if coordinate == 4:
                             childCoords[linkNum] = [0,0.5*currDir[1],0.5*currDir[2]]
                     if currCoord == 2:
-                        if coordinate == 1:
+                        if coordinate == 0:
                             childCoords[linkNum] = [-0.5*currDir[0],-0.5*currDir[1],0]
-                        if coordinate == 2:
+                        if coordinate == 1:
                             childCoords[linkNum] = [-0.5*currDir[0],0.5*currDir[1],0]
-                        if coordinate == 3:
+                        if coordinate == 2:
                             childCoords[linkNum] = [-currDir[0],0,0]
-                        if coordinate == 4:
+                        if coordinate == 3:
                             childCoords[linkNum] = [0,0,0]
-                        if coordinate == 5:
+                        if coordinate == 4:
                             childCoords[linkNum] = [-0.5*currDir[0],0,0.5*currDir[2]]
                     if currCoord == 3:
-                        if coordinate == 1:
+                        if coordinate == 0:
                             childCoords[linkNum] = [0.5*currDir[0],-0.5*currDir[1],0]
-                        if coordinate == 2:
+                        if coordinate == 1:
                             childCoords[linkNum] = [0.5*currDir[0],0.5*currDir[1],0]
-                        if coordinate == 3:
+                        if coordinate == 2:
                             childCoords[linkNum] = [0,0,0]
-                        if coordinate == 4:
+                        if coordinate == 3:
                             childCoords[linkNum] = [currDir[0],0,0]
-                        if coordinate == 5:
+                        if coordinate == 4:
                             childCoords[linkNum] = [0.5*currDir[0],0,0.5*currDir[2]]
                     if currCoord == 4:
-                        if coordinate == 1:
+                        if coordinate == 0:
                             childCoords[linkNum] = [0,-0.5*currDir[1],0.5*currDir[2]]
-                        if coordinate == 2:
+                        if coordinate == 1:
                             childCoords[linkNum] = [0,0.5*currDir[1],0.5*currDir[2]]
-                        if coordinate == 3:
+                        if coordinate == 2:
                             childCoords[linkNum] = [-0.5*currDir[0],0,0.5*currDir[2]]
-                        if coordinate == 4:
+                        if coordinate == 3:
                             childCoords[linkNum] = [0.5*currDir[0],0,0.5*currDir[2]]
-                        if coordinate == 5:
+                        if coordinate == 4:
                             childCoords[linkNum] = [0,0,currDir[2]]
 
             if linkNum in self.spawns:
@@ -135,6 +138,8 @@ class SOLUTION:
             else:
                 self.spawns[linkNum] = [linkNum+1]
 
+            if linkNum == num_links - 1:
+                break
             jointVal = " ".join(str(random.random()) for _ in range(3))
             pyrosim.Send_Joint(
                 name = f"Link{linkNum}_Link{linkNum+1}", 
@@ -150,24 +155,25 @@ class SOLUTION:
     def Create_Brain(self):
         pyrosim.Start_NeuralNetwork("brain" + str(self.myID) + ".nndf")
 
-        name_count = 0
+        count = 0
 
         for idx in range(c.numLinks):
             if idx in c.sensors:
-                pyrosim.Send_Sensor_Neuron(name=f"sensor_{idx}", linkName=f"Link{idx}")
-                name_count += 1
+                pyrosim.Send_Sensor_Neuron(name=count, linkName=f"Link{idx}")
         
-            if idx == c.numLinks - 1 or idx not in self.spawns:
-                continue
-        
-            for kid in self.spawns[idx]:
-                joint_name = f"Link{idx}_Link{kid}"
-                pyrosim.Send_Motor_Neuron(name=f"motor_{idx}_{kid}", jointName=joint_name)
-                name_count += 1
+                if idx == c.numLinks - 1 or idx not in self.spawns:
+                    continue
+            
+                for kid in self.spawns[idx]:
+                    joint_name = f"Link{idx}_Link{kid}"
+                    pyrosim.Send_Motor_Neuron(name=count, jointName=joint_name)
+                    count += 1
 
         for currentRow in range(c.numSensorNeurons):
             for currentColumn in range(c.numMotorNeurons):
-                pyrosim.Send_Synapse(sourceNeuronName = currentRow, targetNeuronName = currentColumn + c.numSensorNeurons, weight = self.weights[currentRow][currentColumn])
+                pyrosim.Send_Synapse(sourceNeuronName = currentRow, 
+                targetNeuronName = currentColumn + c.numSensorNeurons, 
+                weight = self.weights[currentRow][currentColumn])
 
         pyrosim.End()
 
