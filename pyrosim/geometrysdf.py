@@ -10,11 +10,11 @@ class GEOMETRY_SDF:
 
         sizeString = str(size[0]) + " " + str(size[1]) + " " + str(size[2])
 
-        self.string2 = '   <box>'
+        self.string2 = ' <box>'
 
-        self.string3 = '      <size>' + sizeString + '</size>'
+        self.string3 = ' <size>' + sizeString + '</size>'
 
-        self.string4 = '   </box>'
+        self.string4 = ' </box>'
 
         self.string5 = '</geometry>'
 
