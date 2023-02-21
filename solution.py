@@ -31,7 +31,7 @@ class SOLUTION:
         f = open("fitness" + str(self.myID) + ".txt", "r")
         self.fitness = float(f.read())
         print(self.fitness)
-        f.close
+        f.close()
     
     def Start_Simulation(self, directOrGUI):
         self.Create_World()
