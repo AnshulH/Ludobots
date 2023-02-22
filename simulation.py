@@ -1,12 +1,6 @@
 import pybullet as p
 import pybullet_data
 import pyrosim.pyrosim as pyrosim
-import numpy
-import time
-
-import pybullet as p
-import pybullet_data
-import pyrosim.pyrosim as pyrosim
 import time
 import numpy
 import math
