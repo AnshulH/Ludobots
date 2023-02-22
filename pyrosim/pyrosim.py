@@ -169,7 +169,7 @@ def Set_Motor_For_Joint(bodyIndex,jointName,controlMode,targetPosition,maxForce)
 
         targetPosition = targetPosition,
 
-        force          = maxForce)
+        force          = int(maxForce))
 
 def Start_NeuralNetwork(filename):
 

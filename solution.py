@@ -18,6 +18,45 @@ class SOLUTION:
             3: [0,-1,0],
             4: [0,0,1]
         }
+
+        self.coordDirs = {
+            0: {
+                0: [0,0,0],
+                1: [-1, 0, 0],
+                2: [-0.5,-0.5,0],
+                3: [0,-0.5,0.5],
+                4: [0.5,0,0.5],
+            },
+            1: {
+                0: [-1,0,0],
+                1: [0, 0, 0],
+                2: [-0.5,-0.5,0],
+                3: [0,-0.5,0.5],
+                4: [0.5,0,0.5],
+            },
+            2: {
+                0: [-0.5,-0.5,0],
+                1: [0,-0.5,0.5],
+                2: [0,0,0],
+                3: [0,-1,0],
+                4: [0.5,0,0.5],
+            },
+            3: {
+                0: [-0.5,-0.5,0],
+                1: [0,-0.5,0.5],
+                2: [0,-1,0],
+                3: [0,0,0],
+                4: [0.5,0,0.5],
+            },
+            4 : {
+                0: [-0.5,-0.5,0],
+                1: [0,-0.5,0.5],
+                2: [0.5,0.5,0],
+                3: [0,0.5,0.5],
+                4: [0.5,0,0.5],
+            }   
+        }
+        
         self.weights = np.random.rand(c.numSensorNeurons,c.numMotorNeurons) * 2 - 1
 
     def Evaluate(self, directOrGUI):
@@ -74,64 +113,9 @@ class SOLUTION:
                 elif coordinate == currCoord - 1:
                     childCoords[linkNum] = [0, 0, 0]
                     # choose side to add to
-        # 1 -y 2 +y 3 -x 4 +x 5 +z
         # 1 x 2 -x 3 y 4 -y 5 +z
                 else:
-                    if currCoord == 0:
-                        if coordinate == 0:
-                            childCoords[linkNum] = [0,-currDir[1],0]
-                        if coordinate == 1:
-                            childCoords[linkNum] = [0,0,0]
-                        if coordinate == 2:
-                            childCoords[linkNum] = [-0.5*currDir[0],-0.5*currDir[1],0]
-                        if coordinate == 3:
-                            childCoords[linkNum] = [0.5*currDir[0],-0.5*currDir[1],0]
-                        if coordinate == 4:
-                            childCoords[linkNum] = [0,-0.5*currDir[1],0.5*currDir[2]]
-                    if currCoord == 1:
-                        if coordinate == 0:
-                            childCoords[linkNum] = [0,0,0]
-                        if coordinate == 1:
-                            childCoords[linkNum] = [0,currDir[1],0]
-                        if coordinate == 2:
-                            childCoords[linkNum] = [-0.5*currDir[0],0.5*currDir[1],0]
-                        if coordinate == 3:
-                            childCoords[linkNum] = [0.5*currDir[0],0.5*currDir[1],0]
-                        if coordinate == 4:
-                            childCoords[linkNum] = [0,0.5*currDir[1],0.5*currDir[2]]
-                    if currCoord == 2:
-                        if coordinate == 0:
-                            childCoords[linkNum] = [-0.5*currDir[0],-0.5*currDir[1],0]
-                        if coordinate == 1:
-                            childCoords[linkNum] = [-0.5*currDir[0],0.5*currDir[1],0]
-                        if coordinate == 2:
-                            childCoords[linkNum] = [-currDir[0],0,0]
-                        if coordinate == 3:
-                            childCoords[linkNum] = [0,0,0]
-                        if coordinate == 4:
-                            childCoords[linkNum] = [-0.5*currDir[0],0,0.5*currDir[2]]
-                    if currCoord == 3:
-                        if coordinate == 0:
-                            childCoords[linkNum] = [0.5*currDir[0],-0.5*currDir[1],0]
-                        if coordinate == 1:
-                            childCoords[linkNum] = [0.5*currDir[0],0.5*currDir[1],0]
-                        if coordinate == 2:
-                            childCoords[linkNum] = [0,0,0]
-                        if coordinate == 3:
-                            childCoords[linkNum] = [currDir[0],0,0]
-                        if coordinate == 4:
-                            childCoords[linkNum] = [0.5*currDir[0],0,0.5*currDir[2]]
-                    if currCoord == 4:
-                        if coordinate == 0:
-                            childCoords[linkNum] = [0,-0.5*currDir[1],0.5*currDir[2]]
-                        if coordinate == 1:
-                            childCoords[linkNum] = [0,0.5*currDir[1],0.5*currDir[2]]
-                        if coordinate == 2:
-                            childCoords[linkNum] = [-0.5*currDir[0],0,0.5*currDir[2]]
-                        if coordinate == 3:
-                            childCoords[linkNum] = [0.5*currDir[0],0,0.5*currDir[2]]
-                        if coordinate == 4:
-                            childCoords[linkNum] = [0,0,currDir[2]]
+                    childCoords[linkNum] = [self.coordDirs[coordinate][currCoord][0], self.coordDirs[coordinate][currCoord][1], self.coordDirs[coordinate][currCoord][2]]
 
             if linkNum in self.spawns:
                 self.spawns[linkNum].append(linkNum+1)
