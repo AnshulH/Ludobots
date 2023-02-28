@@ -114,9 +114,7 @@ class SOLUTION:
                 xRange, yRange = sizes[0], sizes[1]
             else:
                 relativePosition = [oldLink[0] * self.relativeDirs[direction][0], oldLink[1] * self.relativeDirs[direction][1], oldLink[2] * self.relativeDirs[direction][2]]
-
                 prevLinkname = childName + linkName + str(link - 1)
-
                 yRange = oldLink[1]
                 xRange = oldLink[0]
 
@@ -147,8 +145,8 @@ class SOLUTION:
         pyrosim.Start_NeuralNetwork("brain" + str(self.myID) + ".nndf")
 
         sensorcount = 0 
-        self.linkNames = ["Link0", "Link1", "Link1Link00", "Link1Link10", "Link1Link11", "Link1Link20"]
-        self.jointNames = ["Link0_Link1", "Link1_Link1Link00", "Link1_Link1Link10", "Link1Link10_Link1Link11", "Link1_Link1Link20"]
+        # self.linkNames = ["Link0", "Link1", "Link1Link00", "Link1Link10", "Link1Link11", "Link1Link20"]
+        # self.jointNames = ["Link0_Link1", "Link1_Link1Link00", "Link1_Link1Link10", "Link1Link10_Link1Link11", "Link1_Link1Link20"]
         while sensorcount < len(self.linkNames):
             pyrosim.Send_Sensor_Neuron(name = sensorcount, linkName = self.linkNames[sensorcount])
             sensorcount += 1
