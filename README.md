@@ -1,10 +1,11 @@
 # Ludobots
 3d bot simulations
 
-Teaching a 3d dog to jump and pronk around. Current iteration supports basic pronking but needs to be improved further.
+Generating a random assortment of body parts with different color for sensors and links. 
 
-Fitness function:
-- Idea is to reduce the mean value of all its elements. Lower values seem to be better at jumping/pronking.
+![Bot Creation logic](https://raw.githubusercontent.com/AnshulH/Ludobots/assign7inProg/IMG_3953.jpeg)
+
+Cubes are the only shapes possible now and motor/sensor neurons are assigned randomly. Movement is haphazard as there is no defined fitness function for randomly generated bodies at the moment. Sensors have a mind of their own and will not bend to anyones will. 
 
 ## How to run
 ```

@@ -1,16 +1,13 @@
-import pybullet as p
-import pybullet_data
-import time
-import numpy
-import pyrosim.pyrosim as pyrosim
-import os
-import constants as c
 import sys
 from simulation import SIMULATION
 
-dOrG = sys.argv[1]
+# this gets the second string in the interpreter after python3
+directOrGUI = sys.argv[1] 
 solutionID = sys.argv[2]
 
-simulation = SIMULATION(dOrG, solutionID)
-simulation.Run()
+# create an object -- an instance of the SIMULATION class -- called simulation
+simulation = SIMULATION(directOrGUI, solutionID)
+simulation.run()
+
 simulation.Get_Fitness()
+

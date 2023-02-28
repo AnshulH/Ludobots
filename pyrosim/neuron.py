@@ -51,6 +51,36 @@ class NEURON:
     def Is_Motor_Neuron(self):
 
         return self.type == c.MOTOR_NEURON
+    
+    def Update_Sensor_Neuron(self):
+
+        self.Set_Value(pyrosim.Get_Touch_Sensor_Value_For_Link(self.Get_Link_Name()))
+    
+    def Update_Hidden_Or_Motor_Neuron(self, neurons, synapses):
+
+        self.Set_Value(0.0)
+        
+        for synapse in synapses.keys():
+
+            # check if current synapse arrives at neuron being updated:
+            if synapse[1] == self.Get_Name():
+                # synapseName[1] is the name of synapseName's second (postsynaptic) neuron
+                # self.GetName() is the name of the currently-updating neuron 
+
+                # weight of the current synapse
+                weight = synapses[synapse].Get_Weight()
+                # value of its presynaptic neuron. 
+                value = neurons[synapse[0]].Get_Value()
+
+                self.Allow_Presynaptic_Neuron_To_Influence_Me(weight, value)
+
+        self.Threshold()
+
+    def Allow_Presynaptic_Neuron_To_Influence_Me(self, weight, value):
+
+        # multiplying the presynaptic neuron's value by its outgoing synapse's weight
+        result = value * weight 
+        self.Add_To_Value(result)
 
     def Print(self):
 
@@ -65,26 +95,6 @@ class NEURON:
     def Set_Value(self,value):
 
         self.value = value
-
-    def Update_Sensor_Neuron(self):
-        self.Set_Value(pyrosim.Get_Touch_Sensor_Value_For_Link(self.Get_Link_Name()))
-
-    def Allow_Presynaptic_Neuron_To_Influence_Me(self, weight, neuronValue):
-        # print(key, neuronName)
-        # exit()
-        self.Add_To_Value(weight * neuronValue)
-
-    def Update_Hidden_Or_Motor_Neuron(self, neurons, synapses):
-        self.Set_Value(0.0)
-        # print(neurons)
-        # print(synapses)
-        # print(self.Get_Value())
-        for key in synapses:
-            if key[1] == self.Get_Name():
-                self.Allow_Presynaptic_Neuron_To_Influence_Me(synapses[key].Get_Weight(), neurons[key[0]].Get_Value())
-        self.Threshold()
-        # print(self.Get_Value())
-        # exit()
 
 # -------------------------- Private methods -------------------------
 
