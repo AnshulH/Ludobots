@@ -3,9 +3,16 @@
 
 Generating a random assortment of body parts with different color for sensors and links. 
 
-![Bot Creation logic](https://raw.githubusercontent.com/AnshulH/Ludobots/assign7inProg/IMG_3953.jpeg)
+![Fitness curves](https://raw.githubusercontent.com/AnshulH/Ludobots/assign8/fitcurves.jpg)
 
-Cubes are the only shapes possible now and motor/sensor neurons are assigned randomly. Movement is haphazard as there is no defined fitness function for randomly generated bodies at the moment. Sensors have a mind of their own and will not bend to anyones will. 
+![Bot Creation and mutation logic](https://raw.githubusercontent.com/AnshulH/Ludobots/assign8/IMG_4007.jpeg)
+
+
+## Citation
+
+Code influenced from two sources:
+- Pyrosim package: https://github.com/jbongard/pyrosim
+- r/ludobots - https://www.reddit.com/r/ludobots/ 
 
 ## How to run
 ```
