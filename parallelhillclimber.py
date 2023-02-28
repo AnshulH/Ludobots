@@ -54,11 +54,11 @@ class PARALLEL_HILL_CLIMBER:
 
     def Select(self):
         for i in range(0, constants.populationSize):
-            if self.parents[i].fitness < self.children[i].fitness:
+            if self.parents[i].fitness > self.children[i].fitness:
                 self.parents[i] = self.children[i]
 
     def Show_Best(self):
-        low = 5
+        low = 100
         index = 0
         for idx in range(0, constants.populationSize):
             if self.parents[idx].fitness > low:
