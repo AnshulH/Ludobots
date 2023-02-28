@@ -5,7 +5,7 @@ Generating a random assortment of body parts with different color for sensors an
 
 ![Fitness curves](https://raw.githubusercontent.com/AnshulH/Ludobots/assign8/fitcurves.jpg)
 
-![Bot Creation and mutation logic](https://imgur.com/DcCmU4V)
+![Bot Creation and mutation logic](https://i.imgur.com/DcCmU4V.jpg)
 
 
 ## Citation
