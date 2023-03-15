@@ -44,9 +44,11 @@ b) Changing weights
 
 - In order to select the most appropriate robot from each generation, we use parallel hill climber method. This approach requires creating a group of multiple robots and generating a new offspring with a random mutation for each member of the parent population in every generation. The robot with the highest fitness score, obtained from both parents and offspring, is chosen to advance to the next generation. This process is repeated at each generation, leading to the selection of robots with greater capabilities over time. The accompanying diagram provides a visual representation of this procedure.
 
+Youtube Video: https://youtu.be/fdTYdauiA58
+
 ## Fitness Curves
 
-![Fitness curves](images/fitnesscurve.png)
+![Fitness curves](images/fitnessCurve.png)
 
 Fitness curves for 10 random seeds for population size 5 and generations 500.
 
