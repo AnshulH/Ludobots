@@ -6,8 +6,10 @@ class PARALLEL_HILL_CLIMBER:
     def __init__(self):
         self.parents = {}
         self.nextAvailableID = 0
+        self.count = 0
         for i in range(0, constants.populationSize):
-            self.parents.update({i: solution.SOLUTION(self.nextAvailableID)})
+            self.parents.update({i: solution.SOLUTION(self.nextAvailableID, self.count)})
+            self.count += 1
             self.nextAvailableID += 1
 
     def Evaluate(self, solutions):
@@ -16,7 +18,6 @@ class PARALLEL_HILL_CLIMBER:
 
         for i in solutions:
             solutions[i].Wait_For_Simulation_To_End()
-
 
     def Evolve(self):
         self.Evaluate(self.parents)
@@ -58,10 +59,10 @@ class PARALLEL_HILL_CLIMBER:
                 self.parents[i] = self.children[i]
 
     def Show_Best(self):
-        low = 5
+        low = -1
         index = 0
         for idx in range(0, constants.populationSize):
-            if self.parents[idx].fitness > low:
+            if self.parents[idx].fitness < low:
                 low = self.parents[idx].fitness
                 index = idx
         self.parents[index].Start_Simulation('GUI')

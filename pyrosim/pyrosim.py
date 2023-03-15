@@ -60,6 +60,10 @@ def Get_Touch_Sensor_Value_For_Link(linkName):
 
     return touchValue
 
+def initLinkNames(id):
+    if id not in linkNamesToIndices:
+        linkNamesToIndices[id] = 0
+
 def Prepare_Link_Dictionary(bodyID):
 
     global linkNamesToIndices
@@ -155,6 +159,9 @@ def Send_Synapse( sourceNeuronName , targetNeuronName , weight ):
 
  
 def Set_Motor_For_Joint(bodyIndex,jointName,controlMode,targetPosition,maxForce):
+
+    if jointName not in jointNamesToIndices:
+        return
 
     p.setJointMotorControl2(
 

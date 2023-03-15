@@ -10,7 +10,7 @@ from pyrosim.neuralNetwork import NEURAL_NETWORK
 class ROBOT:
     def __init__(self, solutionID):
         self.solutionID = solutionID
-        self.robotId = p.loadURDF("bodyFit2.urdf")
+        self.robotId = p.loadURDF("bodies0"+ ".urdf")
 
         pyrosim.Prepare_To_Simulate(self.robotId)
 
@@ -42,7 +42,8 @@ class ROBOT:
             if self.nn.Is_Motor_Neuron(neuronName):
                 jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
                 desiredAngle = self.nn.Get_Value_Of(neuronName) * c.motorJointRange
-
+                if jointName not in self.motors:
+                    self.motors[jointName] = MOTOR(jointName)
                 motor = self.motors[jointName]
                 motor.Set_Value(desiredAngle, robot, self.robotId)
         
@@ -51,7 +52,7 @@ class ROBOT:
 
     def Get_Fitness(self):
         basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)
-        yPosition = basePositionAndOrientation[0][0]
+        yPosition = basePositionAndOrientation[0][1]
 
         f = open('tmp' + str(self.solutionID) + '.txt', 'w')
         f.write(str(yPosition))
